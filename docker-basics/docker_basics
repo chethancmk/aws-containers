@@ -1,0 +1,15 @@
+docker version
+docker pull nginx:latest
+docker images
+docker run -d -p 8080:80 --name nginx nginx:latest
+docker ps
+curl http://localhost:8080
+docker logs nginx
+docker exec -it nginx /bin/bash
+echo "<h1> Update Nginx HTML File </h1>" > index.html
+cat index.html 
+exit
+docker stop nginx
+docker rm nginx
+docker rmi nginx:latest
+
