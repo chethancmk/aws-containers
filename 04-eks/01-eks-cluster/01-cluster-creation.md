@@ -5,8 +5,16 @@ eksctl create cluster -f eksworkshop.yaml
 
 # 2 Generate Kubeconfig for connection
 # https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/
-aws eks --region ap-south-1 update-kubeconfig --name eksworkshop-eksctl-upg
+
+
+## kubectl config context
 nano ~/.kube/config
+mv ~/.kube/config  ~/.kube/config_bkp
+aws eks --region ap-south-1 update-kubeconfig --name eksworkshop-eksctl-upg
+
+k config get-contexts
+k config use-context arn:aws:eks:ap-south-1:895300689201:cluster/eksworkshop-eksctl-upg
+k config delete-context arn:aws:eks:ap-south-1:895300689201:cluster/eksworkshop-eksctl-upg
 <!-- Get the cluster name -->
 k cluster-info dump | grep cluster-name
 

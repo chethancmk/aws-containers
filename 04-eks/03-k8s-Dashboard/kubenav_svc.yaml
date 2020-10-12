@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"kubenav","namespace":"kubenav"},"spec":{"ports":[{"name":"http","port":14122,"protocol":"TCP","targetPort":"http"}],"selector":{"app.kubernetes.io/instance":"kubenav","app.kubernetes.io/name":"kubenav"},"type":"ClusterIP"}}
+  creationTimestamp: "2020-10-12T07:13:42Z"
+  name: kubenav
+  namespace: kubenav
+  resourceVersion: "903159"
+  selfLink: /api/v1/namespaces/kubenav/services/kubenav
+  uid: 414623a5-0450-49be-aa60-9e48bde6bf51
+spec:
+  clusterIP: 172.20.211.56
+  ports:
+  - name: http
+    port: 14122
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: kubenav
+    app.kubernetes.io/name: kubenav
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}

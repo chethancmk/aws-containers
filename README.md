@@ -1,15 +1,15 @@
 EKS Labs
 # Preparation
-1. Prepare VM with tools (00-prep-vm.sh)
+1. Prepare VM with tools (A-prep-vm.sh)
     a.git client
     b.docker
     c.python3
     d.nodejs
     e.awscli upgrade
-2.  Install CLI tools (01-cli_tools.sh)
+2.  Install CLI tools (B-cli_tools.sh)
     1.jq
     2.yq
-3.  Environment Variables for AWS Account (02-env-init_scripts.sh)
+3.  Environment Variables for AWS Account (C-env-init_scripts.sh)
 
 # Docker Introduction
 1. Docker Basic Commands
@@ -30,14 +30,20 @@ EKS Labs
     4. Upgrade EKS
 
 # EKS Data Plane
-1. Node Group Types
+1. Node Groups
     1. Managed 
     2. Unmanaged
     3. Fargate
     4. Windows
     5. Bottlerocket
 
+# Kubernetes Dashboard
+1. kubernetes Dashboard
+2. kubenav Dashboard
+
 # EKS HealthChecks
+1. Liveness Probe
+2. Readiness Probe
 
 # EKS Scaling
     1. Horizontal Pod Scaling
