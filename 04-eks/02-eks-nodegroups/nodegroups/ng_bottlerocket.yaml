@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eksworkshop-eksctl-upg
+  region: ap-south-1
+
+nodeGroups:
+  - name: t3-unmanaged
+    instanceType: t3.large
+    desiredCapacity: 2 
+    amiFamily: Bottlerocket
+    # AmazonLinux2
+    # Ubuntu1804
+    # WindowsServer2019FullContainer
+    # WindowsServer2019CoreContainer
+    # WindowsServer1909CoreContainer
+    # WindowsServer2004CoreContainer
+    instancePrefix: eks-br
+    instanceName: prod-app
+    labels: {role: worker,type: bottlerocket}  
+    # iam:
+    #   instanceProfileARN: "arn:aws:iam::895300689201:instance-profile/eksctl-mb3-eksctl-nodegroup-role, arn:aws:iam::895300689201:instance-profile/eksctl-mb3-eksctl-nodegroup-role-ip"
+    #   instanceRoleARN: "arn:aws:iam::895300689201:role/eksctl-mb3-eksctl-nodegroup-role"

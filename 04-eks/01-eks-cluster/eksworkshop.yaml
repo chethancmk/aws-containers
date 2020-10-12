@@ -1,0 +1,41 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eksworkshop-eksctl-upg
+  region: ap-south-1
+  version: "1.15"
+
+availabilityZones: ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
+
+vpc:
+  cidr: 10.10.0.0/16
+  # disable public access to endpoint and only allow private access
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: true
+
+managedNodeGroups:
+- name: t3-managed-ng
+  instanceType: t3.large
+  minSize: 2
+  maxSize: 4
+  desiredCapacity: 2
+  privateNetworking: true
+  instancePrefix: eks-default
+  instanceName: t3-managed
+  labels: {role: worker,type: managed}  
+  ssh:
+    allow: true
+    publicKeyName: eksworkshop
+  tags:
+    nodegroup-role: t3-worker    
+
+# To enable all of the control plane logs, uncomment below:
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["audit", "authenticator", "controllerManager"]
+
+secretsEncryption:
+  keyARN: arn:aws:kms:ap-south-1:895300689201:key/5378d4df-5015-4619-9616-a3054e855a5e

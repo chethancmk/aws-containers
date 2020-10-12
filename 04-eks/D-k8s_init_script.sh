@@ -25,8 +25,7 @@ sudo curl --silent --location -o /usr/local/bin/kubectl \
 
 sudo chmod +x /usr/local/bin/kubectl
 
-# Kubectl Batch Completion
-
+# Kubectl Bash Completion
 kubectl completion bash >>  ~/.bash_completion
 . /etc/profile.d/bash_completion.sh
 . ~/.bash_completion

@@ -43,7 +43,7 @@ eksctl create iamserviceaccount \
 wget https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${ALB_INGRESS_VERSION}/docs/examples/alb-ingress-controller.yaml
 # Remove Service Account and Update cluster name
 kubectl apply -f alb-ingress-controller.yaml
-kubectl logs -n kube-system $(kubectl get po -n kube-system | grep -o alb-ingress[a-zA-Z0-9-]+)
+kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o "alb-ingress[a-zA-Z0-9-]+")
 
 
 kubectl delete svc my-nginx -n my-nginx

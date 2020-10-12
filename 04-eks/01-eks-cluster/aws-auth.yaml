@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::895300689201:role/eksctl-eksworkshop-eksctl-upg-nod-NodeInstanceRole-E4ZRLFCKNAZ0
+      username: system:node:{{EC2PrivateDNSName}}
+    - groups:
+      - system:masters
+      rolearn: arn:aws:iam::895300689201:role/eks-dev
+      username: eks-dev
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"mapRoles":"- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::895300689201:role/eksctl-eksworkshop-eksctl-upg-nod-NodeInstanceRole-E4ZRLFCKNAZ0\n  username: system:node:{{EC2PrivateDNSName}}\n- groups:\n  - system:masters\n  rolearn: arn:aws:iam::895300689201:role/eks-dev\n  username: eks-dev\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2020-10-08T06:51:50Z","name":"aws-auth","namespace":"kube-system","resourceVersion":"1302","selfLink":"/api/v1/namespaces/kube-system/configmaps/aws-auth","uid":"569f3eec-1e89-40f2-b4ef-a4d9e8f57bc7"}}
+  creationTimestamp: "2020-10-08T06:51:50Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "4118"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/aws-auth
+  uid: 569f3eec-1e89-40f2-b4ef-a4d9e8f57bc7

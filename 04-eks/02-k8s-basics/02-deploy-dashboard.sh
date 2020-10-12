@@ -9,3 +9,6 @@ kubectl get svc kubernetes-dashboard -n kubernetes-dashboard
 # Get the URL and login with tokeb
 aws eks get-token --cluster-name eksworkshop-eksctl | jq -r '.status.token'
 # Deploy a Deployment through the portal and delete the deployment.
+
+
+kubectl apply --kustomize github.com/kubenav/deploy/kustomize
