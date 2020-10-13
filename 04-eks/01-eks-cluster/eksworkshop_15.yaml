@@ -17,7 +17,7 @@ vpc:
     privateAccess: true
 
 managedNodeGroups:
-- name: uipl15_managed_ng
+- name: uipl15-managed-ng
   instanceType: t3.large
   minSize: 2
   maxSize: 4

@@ -1,7 +1,8 @@
 # https://github.com/weaveworks/eksctl/tree/master/examples
 
 # 1 Create a EKS Cluster
-eksctl create cluster -f eksworkshop.yaml
+eksctl create cluster -f eksworkshop_15.yaml
+eksctl create cluster -f eksworkshop_17.yaml
 
 # 2 Generate Kubeconfig for connection
 # https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/
