@@ -1,14 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: my-ingress
-  # Uncomment following line for fargate
-  # namespace: fargate
+  name: "fg-ingress"  
+  namespace: fargate
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    # Uncomment following line for fargate
-    # alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
   - http:

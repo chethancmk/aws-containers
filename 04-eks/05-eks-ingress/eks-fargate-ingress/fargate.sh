@@ -1,28 +1,16 @@
 # Create
-eksctl create fargateprofile \
-  --cluster eksworkshop-eksctl \
-  --name 2048-game \
-  --namespace 2048-game
-
+eksctl create fargateprofile   --cluster eksworkshop-eksctl-upg   --name fargate   --namespace fargate
 
 # Check Fargate Profile
-eksctl get fargateprofile \
-  --cluster eksworkshop-eksctl \
-  -o yaml
+eksctl get fargateprofile   --cluster eksworkshop-eksctl-upg  -o yaml
 
-# Apply 2048 Game
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${ALB_INGRESS_VERSION}/docs/examples/2048/2048-namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${ALB_INGRESS_VERSION}/docs/examples/2048/2048-deployment.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${ALB_INGRESS_VERSION}/docs/examples/2048/2048-service.yaml
-
-
-kubectl -n 2048-game rollout status deployment 2048-deployment
+# Apply nginx deployment and service
+kubectl create ns fargate
+kubectl create deployment nginx --image nginx -n fargate
+kubectl expose deployment nginx --port 80 --type=NodePort -n fargate
 
 # Setup OIDC Provider
-eksctl utils associate-iam-oidc-provider \
-  --cluster eksworkshop-eksctl \
-  --region=$AWS_REGION \
-  --approve
+eksctl utils associate-iam-oidc-provider   --cluster eksworkshop-eksctl-upg   --region=ap-south-1   --approve
 
 #   Setup ingress policy
 aws iam create-policy \
@@ -34,18 +22,18 @@ export FARGATE_POLICY_ARN=$(aws iam list-policies --query 'Policies[?PolicyName=
 
 eksctl create iamserviceaccount \
   --name alb-ingress-controller \
-  --namespace 2048-game \
-  --cluster eksworkshop-eksctl \
+  --namespace fargate \
+  --cluster eksworkshop-eksctl-upg \
   --attach-policy-arn ${FARGATE_POLICY_ARN} \
   --approve \
   --override-existing-serviceaccounts
 
 # Check the SA created
-kubectl get sa alb-ingress-controller -n 2048-game -o yaml
+kubectl get sa alb-ingress-controller -n fargate -o yaml
 
 # Create RBAC ROle
 curl -sS  https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${ALB_INGRESS_VERSION}/docs/examples/rbac-role.yaml \
-  | sed 's/namespace: kube-system/namespace: 2048-game/g' \
+  | sed 's/namespace: kube-system/namespace: fargate/g' \
   | kubectl apply -f -
 
 kubectl describe clusterrole alb-ingress-controller
@@ -56,7 +44,7 @@ helm version
 helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
 
 # Get the VPC ID
-export VPC_ID=$(aws eks describe-cluster --name eksworkshop-eksctl --query "cluster.resourcesVpcConfig.vpcId" --output text)
+export VPC_ID=$(aws eks describe-cluster --name eksworkshop-eksctl-upg --query "cluster.resourcesVpcConfig.vpcId" --output text)
 
 helm --namespace 2048-game install 2048-game \
   incubator/aws-alb-ingress-controller \
@@ -120,3 +108,5 @@ kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingr
 
 # Delete IAM policy
 aws iam delete-policy --policy-arn $FARGATE_POLICY_ARN
+
+eksctl delete fargateprofile fargate  --cluster eksworkshop-eksctl-upg

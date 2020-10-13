@@ -6,13 +6,13 @@ metadata:
   region: ap-south-1
 
 managedNodeGroups:
-- name: t3-managed-ng
+- name: t3-managed-ng-pub
   instanceType: t3.large
   minSize: 2
-  maxSize: 4
+  maxSize: 2
   desiredCapacity: 2
-  privateNetworking: true
-  instancePrefix: eks-mng
+  privateNetworking: false
+  instancePrefix: eks-mng-pub
   instanceName: prod-app
   labels: {role: worker,type: managed}  
   ssh:
