@@ -80,7 +80,8 @@
 **3. Nginx on Linux**
 
       kubectl apply -f linux_nginx_server.yaml
-4. Cleanup 
+      
+**4. Cleanup** 
 
 	    kubectl delete -f windows_server_iis.yaml
 	    kubectl delete -f linux_nginx_server.yaml
