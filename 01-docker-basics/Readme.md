@@ -9,14 +9,14 @@
     docker images
     docker run -d -p 80:80 --name nginx nginx:latest
     docker ps
-    curl http://localhost:8080
+    curl http://localhost:80 | grep Welcome
 
 **3. Check the logs and log into the container for updating**
 
     docker logs nginx
     docker logs nginx -f
     docker exec -it nginx /bin/bash
-    echo  "<h1>My New HTML File<h1>" > /usr/share/nginx/html/myfile.html
+    echo  "<h1>My New HTML File<h1>" > /usr/share/nginx/html/index.html
     exit
     curl http://localhost:8080
 
@@ -46,13 +46,14 @@
     docker build -t svca:latest .
     docker history svca:latest
     docker run -d -p 8090:80 --name svca svca:latest
-    curl http://localhost:8090
+    curl http://localhost:80
 
 **3. File System Mount for live changes**
 
     docker run -d -p 8090:80 -v $PWD/index.html:/usr/share/nginx/html/index.html:ro --name nginx nginx:latest
     curl http://localhost:8080
     docker stop nginx && docker rm nginx && docker rmi nginx
+
 **4. Docker Push Command** 
 
 > https://hub.docker.com/
@@ -63,7 +64,7 @@
   
 **5. Pull custom image from hub**
 
-    docker rmi chethancmk/svca
+    docker rmi chethancmk/svca1
     docker rmi svca
-    docker pull chethancmk/svca
+    docker pull chethancmk/svca1
 

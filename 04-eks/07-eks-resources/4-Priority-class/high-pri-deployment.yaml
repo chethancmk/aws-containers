@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: high-pri-dep
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+  template: 
+    metadata:     
+      labels:
+        app: nginx
+    spec:
+      priorityClassName: "high-priority"      
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          limits:
+            cpu: 0.5
+            memory: 500M

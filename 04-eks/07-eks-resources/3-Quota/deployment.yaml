@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev
+  template: 
+    metadata:     
+      labels:
+        app: dev
+    spec:
+      containers:
+      - name: dev
+        image: hande007/stress-ng  
+        args:
+        - --vm-keep
+        - --vm-bytes
+        - 200M
+        - --timeout
+        - 600s
+        - --vm
+        - "1"
+        - --oomable
+        - --verbose    
+        resources:
+          limits:
+            cpu: 250m
+            memory: 250M

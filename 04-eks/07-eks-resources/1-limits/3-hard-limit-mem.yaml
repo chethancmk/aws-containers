@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mem-over-limit
+spec:
+  containers:
+  - name: mem-over-limit
+    image: hande007/stress-ng  
+    args:
+    - --vm-keep
+    - --vm-bytes
+    - 2g
+    - --timeout
+    - 600s
+    - --vm
+    - "1"
+    - --oomable
+    - --verbose    
+    resources:
+      limits:
+        cpu: 1
+        memory: 1G

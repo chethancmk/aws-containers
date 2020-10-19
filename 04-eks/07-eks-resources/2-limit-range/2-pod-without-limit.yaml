@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-without-limit
+  namespace: limit-range
+spec:
+  containers:
+  - name: limit
+    image: hande007/stress-ng  
+    args:
+    - --vm-keep
+    - --vm-bytes
+    - 200M
+    - --timeout
+    - 600s
+    - --vm
+    - "1"
+    - --oomable
+    - --verbose    
