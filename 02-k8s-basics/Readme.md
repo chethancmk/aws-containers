@@ -7,6 +7,9 @@
     kubectl version
     nano ~/.kube/config
 
+    kubectl api-resources
+    kubectl api-version
+
 **2. Create Sample Deployment and Scale**
 
     k create deployment nginx --image=nginx

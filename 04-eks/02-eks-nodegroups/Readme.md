@@ -1,10 +1,7 @@
 # Creating Node Groups
-
   
-
 > https://github.com/weaveworks/eksctl/tree/master/examples
-
-  
+ 
 
 **1. Create Unmanaged Node Group**
 

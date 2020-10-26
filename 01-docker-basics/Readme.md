@@ -10,6 +10,7 @@
     docker run -d -p 80:80 --name nginx nginx:latest
     docker ps
     curl http://localhost:80 | grep Welcome
+    watch netstat -an | grep 80
 
 **3. Check the logs and log into the container for updating**
 
@@ -47,6 +48,7 @@
     docker history svca:latest
     docker run -d -p 8090:80 --name svca svca:latest
     curl http://localhost:80
+    docker dive svca:latest
 
 **3. File System Mount for live changes**
 

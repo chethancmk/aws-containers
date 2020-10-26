@@ -1,4 +1,22 @@
 
+**0. Manual Cluster Creation**
+    0. https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
+    1. Create Cluster Creation Role (eksClusterAdmin - Admin Policy)
+    2. Create Cluster Role (eksClusterRole - AmazonEKSClusterPolicy)
+    3. Create Cluster Node Role (eksNodeRole)
+            AmazonEKSWorkerNodePolicy +  AmazonEKS_CNI_Policy + AmazonEC2ContainerRegistryReadOnly
+    4. Deploy a VPC with atleast 2 Subnet
+        https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2020-08-12/amazon-eks-vpc-private-subnets.yaml
+    5. Optional : Create a KMS Key for Secrets Encryption
+    6. Optional : ssh key pair
+    6. Create cluster from console
+    7. Install aws cli
+    8. Install kubectl
+    9. Create kubeconfig file
+        aws eks --region ap-south-1 update-kubeconfig --name uipl18
+    10. Install cluster Autoscaler
+
+
 **1.  Create a EKS Cluster**
 
     eksctl create cluster -f eksworkshop_15.yaml    
