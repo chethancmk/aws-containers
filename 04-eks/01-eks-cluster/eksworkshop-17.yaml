@@ -16,6 +16,22 @@ vpc:
     publicAccess: true
     privateAccess: true
 
+managedNodeGroups:
+- name: uipl17-managed-ng
+  instanceType: t3.large
+  minSize: 2
+  maxSize: 4
+  desiredCapacity: 2
+  privateNetworking: false
+  instancePrefix: uipl17-pub
+  instanceName: t3-managed
+  labels: {role: worker,type: managed}  
+  ssh:
+    allow: true
+    publicKeyName: eksworkshop
+  tags:
+    nodegroup-role: t3-worker    
+
 # To enable all of the control plane logs, uncomment below:
 cloudWatch:
   clusterLogging:

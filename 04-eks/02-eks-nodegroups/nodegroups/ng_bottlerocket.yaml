@@ -2,12 +2,12 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: eksworkshop-eksctl-upg
+  name: uipl17
   region: ap-south-1
 
 nodeGroups:
-  - name: t3-unmanaged
-    instanceType: t3.large
+  - name: t3-unmanaged-v18
+    instanceType: t3.medium
     desiredCapacity: 2 
     amiFamily: Bottlerocket
     # AmazonLinux2
@@ -16,7 +16,7 @@ nodeGroups:
     # WindowsServer2019CoreContainer
     # WindowsServer1909CoreContainer
     # WindowsServer2004CoreContainer
-    instancePrefix: eks-br
+    instancePrefix: eks-br-18
     instanceName: prod-app
     labels: {role: worker,type: bottlerocket}  
     # iam:

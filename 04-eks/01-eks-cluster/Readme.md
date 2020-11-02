@@ -13,9 +13,9 @@
     7. Install aws cli
     8. Install kubectl
     9. Create kubeconfig file
-        aws eks --region ap-south-1 update-kubeconfig --name uipl18
+        aws eks --region ap-south-1 update-kubeconfig --name uipl_sgp
+    11. Default cluster creation role - Identification
     10. Install cluster Autoscaler
-
 
 **1.  Create a EKS Cluster**
 
@@ -72,18 +72,18 @@
 *1. Check the updates available*
 
     aws eks list-clusters    
-    aws eks describe-cluster --name eksworkshop-eksctl-upg    
-    aws eks list-updates --name eksworkshop-eksctl-upg
+    aws eks describe-cluster --name uipl17 
+    aws eks list-updates --name uipl17
 
 *2. Upgrade cluster*
 
-    eksctl upgrade cluster --name=eksworkshop-eksctl-upg --approve
+    eksctl upgrade cluster --name=uipl17 --approve
 
   
 *3. Upgrade Node Group by creating new nodegroup - Managed/Launch Template*
 
     eksctl get nodegroup --eksworkshop-eksctl-upg
-    eksctl upgrade nodegroup --name= t3-managed-ng --cluster=eksworkshop-eksctl-upg --kubernetes-version=1.16
+    eksctl upgrade nodegroup --name= t3-managed-ng --cluster=uipl17 --kubernetes-version=1.18
 
   
 > eksctl create nodegroup --cluster=eksworkshop-eksctl-upg

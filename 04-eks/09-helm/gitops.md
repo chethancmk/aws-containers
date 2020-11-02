@@ -8,7 +8,7 @@ An example approach for Kubernetes and AWS GitOps (Relates to blog post above): 
 https://github.com/rnzsgh/eks-workshop-sample-api-service-go
 
 
-    Amazon EKS Workshop: eksworkshop.com 
-    AWS App Mesh Workshop: https://www.appmeshworkshop.com/ 
-    Observability Workshop: https://www.observabilityworkshop.com/ 
-    Containers from the Couch (Twitch series): https://www.twitch.tv/search?term=containers%20from%20the%20couch 
+Amazon EKS Workshop: eksworkshop.com 
+AWS App Mesh Workshop: https://www.appmeshworkshop.com/ 
+Observability Workshop: https://www.observabilityworkshop.com/ 
+Containers from the Couch (Twitch series): https://www.twitch.tv/search?term=containers%20from%20the%20couch 

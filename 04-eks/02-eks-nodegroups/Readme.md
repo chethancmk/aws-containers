@@ -11,8 +11,7 @@
  
 
     eksctl create nodegroup -f ./nodegroups/ng_managed.yaml
-
-  
+ 
 
 **3 Create Spot Node Group**
 
@@ -39,7 +38,7 @@
  
 -  Get the Fargate profile
 
-		    eksctl get fargateprofile --cluster eksworkshop-eksctl-upg --name fargate -o yaml
+		    eksctl get fargateprofile --cluster uipl17 --name fargate -o yaml
 
 **7. Check the nodes created by label**
 

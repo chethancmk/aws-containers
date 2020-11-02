@@ -4,20 +4,22 @@ data:
     - groups:
       - system:bootstrappers
       - system:nodes
-      rolearn: arn:aws:iam::895300689201:role/eksctl-eksworkshop-eksctl-upg-nod-NodeInstanceRole-E4ZRLFCKNAZ0
+      rolearn: arn:aws:iam::895300689201:role/eksNodeRole
       username: system:node:{{EC2PrivateDNSName}}
     - groups:
       - system:masters
-      rolearn: arn:aws:iam::895300689201:role/eks-dev
-      username: eks-dev
+      - system:bootstrappers
+      - system:nodes      
+      rolearn: arn:aws:iam::895300689201:role/eksworkshop-admin
+      username: eksworkshop-admin
 kind: ConfigMap
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","data":{"mapRoles":"- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::895300689201:role/eksctl-eksworkshop-eksctl-upg-nod-NodeInstanceRole-E4ZRLFCKNAZ0\n  username: system:node:{{EC2PrivateDNSName}}\n- groups:\n  - system:masters\n  rolearn: arn:aws:iam::895300689201:role/eks-dev\n  username: eks-dev\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2020-10-08T06:51:50Z","name":"aws-auth","namespace":"kube-system","resourceVersion":"1302","selfLink":"/api/v1/namespaces/kube-system/configmaps/aws-auth","uid":"569f3eec-1e89-40f2-b4ef-a4d9e8f57bc7"}}
-  creationTimestamp: "2020-10-08T06:51:50Z"
+      {"apiVersion":"v1","data":{"mapRoles":"- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::895300689201:role/eksNodeRole\n  username: system:node:{{EC2PrivateDNSName}}\n- groups:\n  - system:master\n  rolearn: arn:aws:iam::895300689201:role/eksworkshop-admin\n  username: eksworkshop-admin\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2020-10-27T12:56:58Z","name":"aws-auth","namespace":"kube-system","resourceVersion":"5420","selfLink":"/api/v1/namespaces/kube-system/configmaps/aws-auth","uid":"e46634c5-9a8b-431a-b6c9-8b23ee39d610"}}
+  creationTimestamp: "2020-10-27T12:56:58Z"
   name: aws-auth
   namespace: kube-system
-  resourceVersion: "4118"
+  resourceVersion: "12623"
   selfLink: /api/v1/namespaces/kube-system/configmaps/aws-auth
-  uid: 569f3eec-1e89-40f2-b4ef-a4d9e8f57bc7
+  uid: e46634c5-9a8b-431a-b6c9-8b23ee39d610
