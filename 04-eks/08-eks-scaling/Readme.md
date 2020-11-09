@@ -17,8 +17,7 @@
 		k autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
 		k get hpa
 
-  3. Simulate Load
-		
+3. Simulate Load
 
 	     k run -i --tty load-generator --image=busybox /bin/sh
 	     while  true; do wget -q -O - http://php-apache; done
