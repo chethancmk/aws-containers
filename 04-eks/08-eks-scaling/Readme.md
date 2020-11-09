@@ -34,27 +34,32 @@
 
 ###  1. Security setup to trigger scaling of nodes
 
+0. Check the ASG
+aws autoscaling \
+    describe-auto-scaling-groups \
+    --query "AutoScalingGroups[? Tags[? (Key=='eks:cluster-name') && Value=='uipl17']].[AutoScalingGroupName, MinSize, MaxSize,DesiredCapacity]" \
+    --output table
+
+
 1. Register eks OIDC with iam
 
-		eksctl utils associate-iam-oidc-provider \
-		--cluster eksworkshop-eksctl \
-		--approve
+		eksctl utils associate-iam-oidc-provider --cluster uipl17 --approve
+		 
 
   2. Create policy for Autoscaling
 			
-		  aws iam create-policy \
-		  --policy-name k8s-asg-policy \
-		  --policy-document k8s-asg-policy.json
+		  aws iam create-policy --policy-name k8s-asg-policy --policy-document k8s-asg-policy.json
 
 3. Create Service Account with policy reference
 
-		eksctl create iamserviceaccount \
-		--name cluster-autoscaler \
-		--namespace kube-system \
-		--cluster ${CLUSTERNAME}\
-		--attach-policy-arn "arn:aws:iam::${ACCOUNT_ID}:policy/k8s-asg-policy" \
-		--approve \
-		--override-existing-serviceaccounts
+eksctl create iamserviceaccount \
+ --name cluster-autoscaler \
+ --namespace kube-system \
+ --cluster uipl17\
+ --attach-policy-arn "arn:aws:iam::${ACCOUNT_ID}:policy/k8s-asg-policy" \
+ --approve \
+ --override-existing-serviceaccounts
+
 4. Check the service account created
 
 	    kubectl -n kube-system describe sa cluster-autoscaler

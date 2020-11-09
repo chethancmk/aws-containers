@@ -1,22 +1,18 @@
 
 # EKS ALB Ingress
 
-  
-
 ### Prerequisite parameters
 
 1. Get the VPC ID and the latest Ingress Version
 
 	    export ALB_INGRESS_VERSION=v1.1.8
-	    export VPC_ID=$(aws eks describe-cluster --name eksworkshop-eksctl-upg --query "cluster.resourcesVpcConfig.vpcId" --output text)
-
-  
+	    export VPC_ID=$(aws eks describe-cluster --name uipl17 --query "cluster.resourcesVpcConfig.vpcId" --output text)
 
 ### Security Config to Allow Ingress Creation
 
 1. Register EKS OIDC with IAM
 
-	    eksctl utils associate-iam-oidc-provider --cluster=eksworkshop-eksctl-upg --approve
+	    eksctl utils associate-iam-oidc-provider --cluster=uipl17 --approve
 
 2. Download the template rbac Role and IAM Policy
 
@@ -25,9 +21,9 @@
   
 3. Create an IAM policy with ALB permissions
 
-	    aws iam create-policy \
-	    --policy-name ALBIngressControllerIAMPolicy \
-	    --policy-document iam-policy.json
+aws iam create-policy \
+	--policy-name ALBIngressControllerIAMPolicy \
+	--policy-document file://iam-policy.json
 
   4. Get the IAM Policy ARN
 
@@ -39,14 +35,13 @@
 
   6. Update service account "alb-ingress-controller" with IAM Policy annotation
 
-			eksctl create iamserviceaccount \
-			--cluster=$ClusterName \
-			--namespace=kube-system \
-			--name=alb-ingress-controller \
-			--attach-policy-arn=$PolicyARN \
-			--override-existing-serviceaccounts \
-			--approve
-
+eksctl create iamserviceaccount \
+  --cluster=uipl17 \
+  --namespace=kube-system \
+  --name=alb-ingress-controller \
+  --attach-policy-arn=$PolicyARN \
+  --override-existing-serviceaccounts \
+  --approve
   
 ### Apply the Ingress Controller for ec2
 
@@ -58,7 +53,7 @@
 2. Update (cluster name,vpc id,region,namespace ) in alb-ingress-controller.yaml and Apply the ingress controller.
 	
 		kubectl apply -f alb-ingress-controller.yaml
-		kubectl get deployment alb-ingress-controller -A
+		kubectl get deployment alb-ingress-controller -n kube-system
 
   3. Check the logs of ingress controller pod for any issues
 
