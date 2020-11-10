@@ -37,4 +37,6 @@ helm uninstall aws-for-fluent-bit -n kube-system
 ## Creating Own Chart
 helm create myapp
 helm install --debug myapp --dry-run .
-{{ .Release.Name }}
+helm install myapp
+helm uninstall myapp
+
