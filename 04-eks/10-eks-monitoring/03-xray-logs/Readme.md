@@ -8,12 +8,13 @@
 
     `curl https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/master/k8s-deployment-manifest-templates/deployment-mode/daemonset/cwagent-fluentd-xray/cwagent-fluentd-xray-quickstart.yaml | sed "s/{{cluster_name}}/cluster-name/;s/{{region_name}}/region/" | kubectl apply -f -`
 
-    `kubectl describe daemonset xray-daemon`
-    `kubectl get pod --selector app=xray-daemon`
-    `kubectl logs -l app=xray-daemon`
+    `kubectl describe daemonset xray-daemon -n amazon-cloudwatch`
+    
+    `kubectl get pod --selector name=xray-daemon -n amazon-cloudwatch`
+    
+    `kubectl logs -l name=xray-daemon -n amazon-cloudwatch`
 
   
-
 3. Deploy Microservice for testing
 
     `kubectl apply -f https://eksworkshop.com/intermediate/245_x-ray/sample-front.files/x-ray-sample-front-k8s.yml`
