@@ -5,8 +5,8 @@ metadata:
   name: dev-user-rb
   namespace: dev
 subjects:
-- kind: User
-  name: dev-user
+- kind: Group
+  name: eks-dev-grp
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role

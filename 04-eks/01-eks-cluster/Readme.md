@@ -44,7 +44,7 @@
 
 **4. Additional User Access**
 
-    aws sts assume-role --role-arn "arn:aws:iam::895300689201:role/eks-dev" --role-session-name eks-dev
+    aws sts assume-role --role-arn "arn:aws:iam::895300689201:role/developer" --role-session-name eks-iam-dev
     
     export AWS_ACCESS_KEY_ID=RoleAccessKeyID
     export AWS_SECRET_ACCESS_KEY=RoleSecretKey

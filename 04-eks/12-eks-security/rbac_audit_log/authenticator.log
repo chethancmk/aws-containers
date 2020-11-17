@@ -1,0 +1,9 @@
+time="2020-11-11T06:49:36Z" 
+level=info msg="STS response" 
+accesskeyid=ASIA5A5AULUYWCPI3PBJ 
+accountid=895300689201 
+arn="arn:aws:sts::895300689201:assumed-role/developer/eks-iam-dev" 
+client="127.0.0.1:41106" method=POST 
+path=/authenticate
+session=eks-iam-dev sts=sts.ap-south-1.amazonaws.com 
+userid=AROA5A5AULUYV73W6WKBL

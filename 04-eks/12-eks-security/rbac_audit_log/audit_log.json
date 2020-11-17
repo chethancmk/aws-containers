@@ -1,0 +1,186 @@
+{
+    "kind": "Event",
+    "apiVersion": "audit.k8s.io/v1",
+    "level": "RequestResponse",
+    "auditID": "e2c77b61-f282-447f-b9dd-539d24cf742e",
+    "stage": "ResponseComplete",
+    "requestURI": "/api/v1/namespaces/dev/pods/dev-nginx-86d797dd5f-b2v49",
+    "verb": "delete",
+    "user": {
+        "username": "eks-dev:eks-iam-dev",
+        "uid": "heptio-authenticator-aws:895300689201:AROA5A5AULUYV73W6WKBL",
+        "groups": [
+            "eks-dev-grp",
+            "system:authenticated"
+        ],
+        "extra": {
+            "accessKeyId": [
+                "ASIA5A5AULUYWCPI3PBJ"
+            ]
+        }
+    },
+    "sourceIPs": [
+        "15.207.171.34"
+    ],
+    "userAgent": "kubectl/v1.17.7 (linux/amd64) kubernetes/bffbacf",
+    "objectRef": {
+        "resource": "pods",
+        "namespace": "dev",
+        "name": "dev-nginx-86d797dd5f-b2v49",
+        "apiVersion": "v1"
+    },
+    "responseStatus": {
+        "metadata": {},
+        "code": 200
+    },
+    "requestObject": {
+        "kind": "DeleteOptions",
+        "apiVersion": "v1",
+        "propagationPolicy": "Background"
+    },
+    "responseObject": {
+        "kind": "Pod",
+        "apiVersion": "v1",
+        "metadata": {
+            "name": "dev-nginx-86d797dd5f-b2v49",
+            "generateName": "dev-nginx-86d797dd5f-",
+            "namespace": "dev",
+            "selfLink": "/api/v1/namespaces/dev/pods/dev-nginx-86d797dd5f-b2v49",
+            "uid": "bf526516-1f8e-409b-bddc-ea03972e9b46",
+            "resourceVersion": "608503",
+            "creationTimestamp": "2020-11-11T06:40:11Z",
+            "deletionTimestamp": "2020-11-11T06:54:40Z",
+            "deletionGracePeriodSeconds": 30,
+            "labels": {
+                "app": "dev-nginx",
+                "pod-template-hash": "86d797dd5f"
+            },
+            "annotations": {
+                "kubernetes.io/psp": "eks.privileged"
+            },
+            "ownerReferences": [
+                {
+                    "apiVersion": "apps/v1",
+                    "kind": "ReplicaSet",
+                    "name": "dev-nginx-86d797dd5f",
+                    "uid": "8446eb12-aeb3-4308-bc2b-962b60b047d9",
+                    "controller": true,
+                    "blockOwnerDeletion": true
+                }
+            ]
+        },
+        "spec": {
+            "volumes": [
+                {
+                    "name": "default-token-892ww",
+                    "secret": {
+                        "secretName": "default-token-892ww",
+                        "defaultMode": 420
+                    }
+                }
+            ],
+            "containers": [
+                {
+                    "name": "nginx",
+                    "image": "nginx",
+                    "resources": {},
+                    "volumeMounts": [
+                        {
+                            "name": "default-token-892ww",
+                            "readOnly": true,
+                            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                        }
+                    ],
+                    "terminationMessagePath": "/dev/termination-log",
+                    "terminationMessagePolicy": "File",
+                    "imagePullPolicy": "Always"
+                }
+            ],
+            "restartPolicy": "Always",
+            "terminationGracePeriodSeconds": 30,
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccountName": "default",
+            "serviceAccount": "default",
+            "nodeName": "ip-10-10-22-201.ap-south-1.compute.internal",
+            "securityContext": {},
+            "schedulerName": "default-scheduler",
+            "tolerations": [
+                {
+                    "key": "node.kubernetes.io/not-ready",
+                    "operator": "Exists",
+                    "effect": "NoExecute",
+                    "tolerationSeconds": 300
+                },
+                {
+                    "key": "node.kubernetes.io/unreachable",
+                    "operator": "Exists",
+                    "effect": "NoExecute",
+                    "tolerationSeconds": 300
+                }
+            ],
+            "priority": 0,
+            "enableServiceLinks": true
+        },
+        "status": {
+            "phase": "Running",
+            "conditions": [
+                {
+                    "type": "Initialized",
+                    "status": "True",
+                    "lastProbeTime": null,
+                    "lastTransitionTime": "2020-11-11T06:42:33Z"
+                },
+                {
+                    "type": "Ready",
+                    "status": "True",
+                    "lastProbeTime": null,
+                    "lastTransitionTime": "2020-11-11T06:42:45Z"
+                },
+                {
+                    "type": "ContainersReady",
+                    "status": "True",
+                    "lastProbeTime": null,
+                    "lastTransitionTime": "2020-11-11T06:42:45Z"
+                },
+                {
+                    "type": "PodScheduled",
+                    "status": "True",
+                    "lastProbeTime": null,
+                    "lastTransitionTime": "2020-11-11T06:42:33Z"
+                }
+            ],
+            "hostIP": "10.10.22.201",
+            "podIP": "10.10.1.177",
+            "podIPs": [
+                {
+                    "ip": "10.10.1.177"
+                }
+            ],
+            "startTime": "2020-11-11T06:42:33Z",
+            "containerStatuses": [
+                {
+                    "name": "nginx",
+                    "state": {
+                        "running": {
+                            "startedAt": "2020-11-11T06:42:44Z"
+                        }
+                    },
+                    "lastState": {},
+                    "ready": true,
+                    "restartCount": 0,
+                    "image": "nginx:latest",
+                    "imageID": "docker-pullable://nginx@sha256:aeade65e99e5d5e7ce162833636f692354c227ff438556e5f3ed0335b7cc2f1b",
+                    "containerID": "docker://0915d9b1b21e96c3ccb37f1b0fd3e18f9bf697e7ad79449373f7b7150dfd42ba",
+                    "started": true
+                }
+            ],
+            "qosClass": "BestEffort"
+        }
+    },
+    "requestReceivedTimestamp": "2020-11-11T06:54:10.547660Z",
+    "stageTimestamp": "2020-11-11T06:54:10.556686Z",
+    "annotations": {
+        "authorization.k8s.io/decision": "allow",
+        "authorization.k8s.io/reason": "RBAC: allowed by RoleBinding \"dev-user-rb/dev\" of Role \"dev-role\" to Group \"eks-dev-grp\""
+    }
+}

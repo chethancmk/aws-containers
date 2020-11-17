@@ -1,0 +1,57 @@
+{
+    "eventVersion": "1.05",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA5A5AULUYYAKA45G22:i-0637c6876d819a144",
+        "arn": "arn:aws:sts::895300689201:assumed-role/eksworkshop-admin/i-0637c6876d819a144",
+        "accountId": "895300689201",
+        "accessKeyId": "ASIA5A5AULUYZN2OWVIC",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "AROA5A5AULUYYAKA45G22",
+                "arn": "arn:aws:iam::895300689201:role/eksworkshop-admin",
+                "accountId": "895300689201",
+                "userName": "eksworkshop-admin"
+            },
+            "webIdFederationData": {},
+            "attributes": {
+                "mfaAuthenticated": "false",
+                "creationDate": "2020-11-11T06:44:18Z"
+            },
+            "ec2RoleDelivery": "2.0"
+        }
+    },
+    "eventTime": "2020-11-11T06:46:20Z",
+    "eventSource": "sts.amazonaws.com",
+    "eventName": "AssumeRole",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "15.207.171.34",
+    "userAgent": "aws-cli/1.18.107 Python/2.7.18 Linux/4.14.193-149.317.amzn2.x86_64 botocore/1.17.31",
+    "requestParameters": {
+        "roleArn": "arn:aws:iam::895300689201:role/developer",
+        "roleSessionName": "eks-iam-dev"
+    },
+    "responseElements": {
+        "credentials": {
+            "accessKeyId": "ASIA5A5AULUYWCPI3PBJ",
+            "expiration": "Nov 11, 2020 7:46:20 AM",
+            "sessionToken": "FwoGZXIvYXdzEDAaDOelQfpiEv4o5tZKgyKvAZ7lQP8KJeuic1pctl/dxc3+1H5pUvaO0Ijxw8Gri5IGlelgj8ZHU5+UYvshQmZZyEscAiFWobiOGbpTwWejv8rZkVHS2HVwJLRJTz3dqI+O2B+dnH9R7V0QKhiwyGauXkjT7qdSg2+MmW1aC2hZsLXPX+4a2mQCmXraS1eFUQIM2hhCZqJmiNo/qhjQvL9fhMdsJkHfg6MASa7UzT+wBarcVMTGjHWSsyXayqq1y0AovJGu/QUyLbTDGIboCbrLZagZaBxh5SlSrDuYQsfRS+EBPcBj/kJCR3RUNeqKpsbeZ8+xRQ=="
+        },
+        "assumedRoleUser": {
+            "assumedRoleId": "AROA5A5AULUYV73W6WKBL:eks-iam-dev",
+            "arn": "arn:aws:sts::895300689201:assumed-role/developer/eks-iam-dev"
+        }
+    },
+    "requestID": "20178023-21d7-448d-8754-94877d28464e",
+    "eventID": "28deae21-8b9d-4dc5-a660-65369e314821",
+    "resources": [
+        {
+            "accountId": "895300689201",
+            "type": "AWS::IAM::Role",
+            "ARN": "arn:aws:iam::895300689201:role/developer"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "recipientAccountId": "895300689201"
+}

@@ -4,18 +4,17 @@ data:
     - groups:
       - system:bootstrappers
       - system:nodes
-      rolearn: arn:aws:iam::895300689201:role/eksctl-uipl17-nodegroup-t3-manage-NodeInstanceRole-1KQTSNAR5I1PU
+      rolearn: arn:aws:iam::895300689201:role/eksctl-uipl17-nodegroup-uipl15-ma-NodeInstanceRole-1N5NF6MT91WTD
       username: system:node:{{EC2PrivateDNSName}}
-  mapUsers: |
-    []
+    - groups:
+      - system:masters
+      rolearn: arn:aws:iam::895300689201:role/developer
+      username: developer:{{SessionName}}
 kind: ConfigMap
 metadata:
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","data":{"mapRoles":"- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::895300689201:role/eksctl-uipl17-nodegroup-t3-manage-NodeInstanceRole-1KQTSNAR5I1PU\n  username: system:node:{{EC2PrivateDNSName}}\n","mapUsers":"- userarn: arn:aws:iam::895300689201:user/dev\n  username: dev-user\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2020-10-29T15:30:55Z","name":"aws-auth","namespace":"kube-system","resourceVersion":"1016699","selfLink":"/api/v1/namespaces/kube-system/configmaps/aws-auth","uid":"b4edf4a1-fffd-4ad3-bc39-25b043bcb752"}}
-  creationTimestamp: "2020-10-29T15:30:55Z"
+  creationTimestamp: "2020-11-09T14:04:08Z"
   name: aws-auth
   namespace: kube-system
-  resourceVersion: "1449852"
+  resourceVersion: "342559"
   selfLink: /api/v1/namespaces/kube-system/configmaps/aws-auth
-  uid: b4edf4a1-fffd-4ad3-bc39-25b043bcb752
+  uid: 4cf7e3f7-e413-46dc-a7c2-37d5252b2598

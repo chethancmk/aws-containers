@@ -45,14 +45,14 @@
 
 0. Check the ASG
 aws autoscaling \
-    describe-auto-scaling-groups \
-    --query "AutoScalingGroups[? Tags[? (Key=='eks:cluster-name') && Value=='uipl17']].[AutoScalingGroupName, MinSize, MaxSize,DesiredCapacity]" \
-    --output table
+describe-auto-scaling-groups \
+--query "AutoScalingGroups[? Tags[? (Key=='eks:cluster-name') && Value=='uipl18']].[AutoScalingGroupName, MinSize, MaxSize,DesiredCapacity]" \
+--output table
 
 
 1. Register eks OIDC with iam
 
-		eksctl utils associate-iam-oidc-provider --cluster uipl17 --approve
+		eksctl utils associate-iam-oidc-provider --cluster uipl18 --approve
 		 
 
   2. Create policy for Autoscaling
@@ -64,8 +64,8 @@ aws autoscaling \
 eksctl create iamserviceaccount \
  --name cluster-autoscaler \
  --namespace kube-system \
- --cluster uipl17\
- --attach-policy-arn "arn:aws:iam::${ACCOUNT_ID}:policy/k8s-asg-policy" \
+ --cluster uipl18\
+ --attach-policy-arn "arn:aws:iam::895300689201:policy/k8s-asg-policy" \
  --approve \
  --override-existing-serviceaccounts
 
@@ -77,7 +77,16 @@ eksctl create iamserviceaccount \
 
 1. Get the Autoscaler deployment change safe to evict to false 
 
-	    wget https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+
+kubectl -n kube-system annotate deployment.apps/cluster-autoscaler cluster-autoscaler.kubernetes.io/safe-to-evict="false"
+
+kubectl -n kube-system edit deployment.apps/cluster-autoscaler
+
+    --balance-similar-node-groups
+    --skip-nodes-with-system-pods=false
+
+
 
 		kubectl apply -f cluster-autoscaler-autodiscover.yaml
 		kubectl logs -f deployment/cluster-autoscaler -n kube-system
@@ -91,7 +100,8 @@ eksctl create iamserviceaccount \
 		  kubectl logs -f deployment/cluster-autoscaler -n kube-system
 3. Cleanup
 
-		kubectl delete -f cluster-autoscaler-autodiscover.yaml
+		kubectl delete -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+
 		kubectl delete -f nginx.yaml
 		
 		eksctl delete iamserviceaccount \
