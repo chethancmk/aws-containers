@@ -17,20 +17,35 @@ vpc:
     privateAccess: true
 
 managedNodeGroups:
-- name: uipl15-managed-ng
+- name: uipl18-managed-ng
   instanceType: t3.large
   minSize: 2
   maxSize: 4
   desiredCapacity: 2
-  privateNetworking: false
-  instancePrefix: uipl17-pub
+  privateNetworking: true
+  instancePrefix: uipl18-pub
   instanceName: t3-managed
-  labels: {role: worker,type: managed}  
+  labels: {role: worker,type: managed}      
+  iam:
+    withAddonPolicies:
+      imageBuilder: true
+      autoScaler: true
+      externalDNS: true
+      certManager: true
+      appMesh: true
+      appMeshPreview: true
+      ebs: true
+      fsx: true
+      efs: true
+      albIngress: true
+      xRay: true
+      cloudWatch: true  
   ssh:
     allow: true
     publicKeyName: eksworkshop
   tags:
-    nodegroup-role: t3-worker    
+    nodegroup-role: t3-worker
+   
 
 # To enable all of the control plane logs, uncomment below:
 cloudWatch:

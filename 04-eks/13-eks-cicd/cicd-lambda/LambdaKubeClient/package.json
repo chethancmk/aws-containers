@@ -1,0 +1,19 @@
+{
+  "name": "eks-lambda-cicd",
+  "version": "1.0.0",
+  "description": "Deploy kubernetes app using Lambda",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "grunt deploy",
+    "test": "grunt invoke"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-aws-lambda": "^0.13.0"
+  },
+  "dependencies": {
+    "@kubernetes/client-node": "^0.13.0",
+    "aws-sdk": "^2.329.0",
+    "js-yaml": "^3.12.0"
+  }
+}

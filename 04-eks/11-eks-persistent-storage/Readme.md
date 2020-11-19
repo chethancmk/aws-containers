@@ -10,7 +10,7 @@ kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernete
 kubectl get pods -n kube-system
 
 Create Dynamic EBS Volume
-k apply -f dynamic_ebs_pod.yaml
+k apply -f dynamic_pod.yaml
 
 
 

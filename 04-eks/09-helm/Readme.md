@@ -35,7 +35,7 @@ helm rollback aws-for-fluent-bit 1 -n kube-system eks/aws-for-fluent-bit
 helm uninstall aws-for-fluent-bit -n kube-system 
 
 ## Creating Own Chart
-helm create myapp
+helm create myapp1
 helm install --debug myapp --dry-run .
 helm install myapp
 helm uninstall myapp

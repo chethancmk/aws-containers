@@ -25,7 +25,7 @@
 
 2. Create HPA  
 
-`k autoscale deployment php-apache --cpu-percent=50 --min=1 --max=2`
+`k autoscale deployment php-apache --cpu-percent=50 --min=1 --max=1`
 `k get hpa`
 
 3. Simulate Load  
