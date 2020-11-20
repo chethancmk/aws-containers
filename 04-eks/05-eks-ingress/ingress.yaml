@@ -1,14 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: nginx1
+  name: nginx
   # Uncomment following line for fargate
   namespace: default
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     # Uncomment to Share the Ingress across multiple ingress points
-    alb.ingress.kubernetes.io/group.name: nginx
+    alb.ingress.kubernetes.io/group.name: nginx-servers
     alb.ingress.kubernetes.io/group.order: '10'
     # Uncomment following line for fargate
     # alb.ingress.kubernetes.io/target-type: ip
@@ -18,5 +18,5 @@ spec:
       paths:  
       - path: /*
         backend:
-          serviceName: nginx1
+          serviceName: nginx
           servicePort: 80

@@ -1,70 +1,48 @@
 
-# EKS ALB Ingress
+eksctl utils associate-iam-oidc-provider --cluster uipl18 --region=ap-south-1 --approve
+Delete IAM Policy AWSLoadBalancerControllerIAMPolicy
 
-### Prerequisite parameters
+Get the new IAM policy
+curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
 
-1. Get the VPC ID and the latest Ingress Version
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam-policy.json
 
-	    export ALB_INGRESS_VERSION=v2.0.0
-	    export VPC_ID=$(aws eks describe-cluster --name uipl18 --query "cluster.resourcesVpcConfig.vpcId" --output text)
+ARN : arn:aws:iam::895300689201:policy/AWSLoadBalancerControllerIAMPolicy
 
-### Security Config to Allow Ingress Creation
-
-1. Register EKS OIDC with IAM
-
-	    eksctl utils associate-iam-oidc-provider --cluster=uipl18 --region ap-south-1 --approve
-
-2. Download the template IAM Policy
-
-	    curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/main/docs/install/iam_policy.json
-
-  
-3. Create an IAM policy with ALB permissions
-
-	aws iam create-policy \
-		--policy-name AWSLoadBalancerControllerIAMPolicy \
-		--policy-document file://iam-policy.json
-
-4. Get the IAM Policy ARN
-
-		  export PolicyARN=$(aws iam list-policies --query 'Policies[?PolicyName==`AWSLoadBalancerControllerIAMPolicy`].Arn' --output text)
- 
-
-5. Update service account "alb-ingress-controller" with IAM Policy annotation
+Create IAM Service account with the ALB policy
 
 eksctl create iamserviceaccount \
---cluster=uipl18 \
---namespace=kube-system \
---name=aws-load-balancer-controller \
---attach-policy-arn=$PolicyARN \
---override-existing-serviceaccounts \
---approve
- 
-### Apply the Ingress Controller for ec2
+  --cluster=uipl18 \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --attach-policy-arn=arn:aws:iam::895300689201:policy/AWSLoadBalancerControllerIAMPolicy \
+  --override-existing-serviceaccounts \
+  --approve
 
-https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.0/guide/controller/installation/
+Install the TargetGroupBinding CRD's 
+kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
 
-0. Apply the cert manager
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.2/cert-manager.yaml
+Add Helm Repo for EKS charts
+helm repo add eks https://aws.github.io/eks-charts
+
+Install the Ingress Controller 
+
+helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller \
+  --set clusterName=uipl18 \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  -n kube-system
+
+Verify the deployment
+kubectl get deployment -n kube-system aws-load-balancer-controller
   
-1. Get the template for Ingress Controller
+4. Create Example Deployment/Svc to use in Ingress
 
-	    wget https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/main/docs/install/v2_0_0_full.yaml
-  
-2. Update (cluster name) in alb-ingress-controller.yaml and Apply the ingress controller.
-	
-		k apply -f v2_0_0_full.yaml
-
-3. Check the logs of ingress controller pod for any issues
-
-		kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o "aws-load-balancer-controller-[a-zA-Z0-9-]+") -f
-
-  
-  4. Create Deployment/Svc to use in Ingress
-
-		  k create deployment nginx --image=nginx -n dev
+		  k create deployment nginx --image=nginx
 		  k scale deployment nginx --replicas=3
-		  k expose deployment nginx --port=80 --type=NodePort -n dev
+		  k expose deployment nginx --port=80 --type=NodePort -n
 
   5. Edit the Ingress (ingress.yaml) file for path rules and apply
 
