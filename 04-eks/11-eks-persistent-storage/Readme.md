@@ -15,11 +15,17 @@
 
 4 . Create Deployment with Dynamic EBS Volume
 
-    k apply -f dynamic_pod.yaml
+    k apply -f ebs_dynamic_pod.yaml
+    kubectl describe pv
+    kubectl exec -it app cat /data/out.txt
+
+5 . Delete the Deployment
+
+    k delete -f ebs_dynamic_pod.yaml
 
 5 . Create Deployment with Static EBS Volume. Volume is predefined.
 
-    k apply -f static_pod.yaml    
+    k apply -f ebs_static_pod.yaml    
 
     
 ### EKS Persistent Volumes - EFS
@@ -42,7 +48,8 @@
 
     aws efs create-file-system --creation-token eks-efs    
     aws efs create-mount-target --file-system-id FileSystemId --subnet-id SubnetID --security-group GroupID
+    aws efs describe-file-systems --query "FileSystems[*].FileSystemId"
 
-5 . Configure and Run Pods with EFS access
+5 . Configure and Run Pods with EFS access (Update the volume handle)
 
     k apply -f efs_pod.yaml

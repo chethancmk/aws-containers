@@ -19,7 +19,7 @@ spec:
   storageClassName: ebs-sc
   csi:
     driver: ebs.csi.aws.com
-    volumeHandle: vol-05786ec9ec9526b67
+    volumeHandle: vol-08fc39cf38f8e6ca5
     fsType: xfs
   nodeAffinity:
     required:
