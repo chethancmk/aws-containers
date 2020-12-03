@@ -3,20 +3,20 @@ kind: Ingress
 metadata:
   name: nginx
   # Uncomment following line for fargate
-  namespace: default
+  namespace: dev
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     # Uncomment to Share the Ingress across multiple ingress points
     alb.ingress.kubernetes.io/group.name: nginx-servers
-    alb.ingress.kubernetes.io/group.order: '10'
+    alb.ingress.kubernetes.io/group.order: '20'
     # Uncomment following line for fargate
     # alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
   - http:
       paths:  
-      - path: /*
+      - path: /dev
         backend:
           serviceName: nginx
           servicePort: 80

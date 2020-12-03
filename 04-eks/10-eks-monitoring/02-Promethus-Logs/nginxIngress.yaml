@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^(/grafana)$ $1/ redirect;
+  namespace: mon
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /grafana(/|$)(.*)
+        backend:
+          serviceName: grafana
+          servicePort: 80
+      - path: /nginx(/|$)(.*)
+        backend:
+          serviceName: nginx
+          servicePort: 80          

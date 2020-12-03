@@ -34,7 +34,7 @@ argocd cluster add $CONTEXT_NAME
 7. Apply an App to the ArgoCD
 
 kubectl create namespace ecsdemo-nodejs
-argocd app create ecsdemo-nodejs --repo https://github.com/GITHUB_USERNAME/ecsdemo-nodejs.git --path kubernetes --dest-server https://kubernetes.default.svc --dest-namespace ecsdemo-nodejs
+argocd app create ecsdemo-nodejs --repo https://github.com/chethancmk/ecsdemo-nodejs.git --path kubernetes --dest-server https://kubernetes.default.svc --dest-namespace ecsdemo-nodejs
 
 8. Check the applied app and sync 
 
