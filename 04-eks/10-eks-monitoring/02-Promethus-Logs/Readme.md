@@ -50,6 +50,8 @@
 
 7. Deploy the nginx ingress to expose grafana
 
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+        helm install nginx ingress-nginx/ingress-nginx --namespace mon --set controller.service.type=NodePort
         k apply -f nginxIngress.yaml
 
 7. Get Password
