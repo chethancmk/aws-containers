@@ -56,13 +56,13 @@
 
         kubectl get secret --namespace mon grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
  
-8. Edit the Config Map to change the root path for reverse proxy in the .ini file
+8. Edit the Config Map to change the root path for reverse proxy with your loadbalancer and path in the .ini file
 
         k edit cm grafana -n mon
 
         [server]
-        domain = k8s-mon-mylb-20cc66def3-1274277145.ap-south-1.elb.amazonaws.com
-        root_url = http://k8s-mon-mylb-20cc66def3-1274277145.ap-south-1.elb.amazonaws.com/grafana/
+        domain = <ELB DNS>
+        root_url = http://<ELB DNS>/grafana/
 
     
 9. Create POD Monitoring Dashboard with id 6417 and import for prometheus
