@@ -2,9 +2,9 @@
 1. Check Helm Installed
 
         helm list
-        kubectl create namespace prometheus
+        kubectl create namespace mon
 
-    helm install prometheus prometheus-community/prometheus \
+        helm install prometheus prometheus-community/prometheus \
         --namespace mon \
         --set alertmanager.persistentVolume.storageClass="gp2" \
         --set server.persistentVolume.storageClass="gp2"
